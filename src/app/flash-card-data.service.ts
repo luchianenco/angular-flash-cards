@@ -28,7 +28,7 @@ export class FlashCardDataService {
   }
 
   updateById(id: number, values: Object = {}): FlashCard {
-    let card = this.getById(id);
+    const card = this.getById(id);
     if (!card) {
       return null;
     }
@@ -39,5 +39,9 @@ export class FlashCardDataService {
 
   getAll(): FlashCard[] {
     return this.cards;
+  }
+
+  getByLanguageId(id: number): FlashCard[] {
+    return this.cards.filter(card => card.languageId === id);
   }
 }

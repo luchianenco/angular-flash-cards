@@ -55,37 +55,49 @@ describe('FlashCardDataService', () => {
 
     it('should not removing anything if card with corresponding id is not found',
       inject([FlashCardDataService], (service: FlashCardDataService) => {
-      const card1 = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
-      const card2 = new FlashCard({languageId: 1, value: 'Developer', valueTranslation: 'разработчик'});
-      service.add(card1);
-      service.add(card2);
-      expect(service.getAll()).toEqual([card1, card2]);
-      service.removeById(3);
-      expect(service.getAll()).toEqual([card1, card2]);
+        const card1 = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
+        const card2 = new FlashCard({languageId: 1, value: 'Developer', valueTranslation: 'разработчик'});
+        service.add(card1);
+        service.add(card2);
+        expect(service.getAll()).toEqual([card1, card2]);
+        service.removeById(3);
+        expect(service.getAll()).toEqual([card1, card2]);
+      }));
+  });
+
+  describe('#updateById(id, values)', () => {
+
+    it('should return card with the corresponding id and updated data',
+      inject([FlashCardDataService], (service: FlashCardDataService) => {
+      const card = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
+      service.add(card);
+      const updatedCard = service.updateById(1, {
+        value: 'Game',
+        valueTranslation: 'игра'
+      });
+      expect(updatedCard.value).toEqual('Game');
     }));
 
-    describe('#updateTodoById(id, values)', () => {
+    it('should return null if card is not found', inject([FlashCardDataService], (service: FlashCardDataService) => {
+      const card = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
+      service.add(card);
+      const updatedCard = service.updateById(2, {
+        value: 'Game',
+        valueTranslation: 'игра'
+      });
+      expect(updatedCard).toEqual(null);
+    }));
+  });
 
-      it('should return todo with the corresponding id and updated data',
-        inject([FlashCardDataService], (service: FlashCardDataService) => {
-        const card = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
-        service.add(card);
-        const updatedCard = service.updateById(1, {
-          value: 'Game',
-          valueTranslation: 'игра'
-        });
-        expect(updatedCard.value).toEqual('Game');
-      }));
-
-      it('should return null if todo is not found', inject([FlashCardDataService], (service: FlashCardDataService) => {
-        const card = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
-        service.add(card);
-        const updatedCard = service.updateById(2, {
-          value: 'Game',
-          valueTranslation: 'игра'
-        });
-        expect(updatedCard).toEqual(null);
-      }));
-    });
+  describe('#getByLanguageId(id, values)', () => {
+    it('should get only cards with corresponding language id',
+      inject([FlashCardDataService], (service: FlashCardDataService) => {
+        const card1 = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
+        const card2 = new FlashCard({languageId: 2, value: 'Entwickler', valueTranslation: 'разработчик'});
+        service.add(card1);
+        service.add(card2);
+        expect(service.getByLanguageId(1)).toEqual([card1]);
+        expect(service.getByLanguageId(2)).toEqual([card2]);
+    }));
   });
 });
