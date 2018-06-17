@@ -1,3 +1,12 @@
-<p>
-  recently-added works!
-</p>
+<section class="main" *ngIf="cards.length > 0">
+  <ul class="todo-list">
+    <li *ngFor="let card of cards">
+      <div class="view">
+        <label>{{card.value}} - {{card.valueTranslation}}</label>
+      </div>
+    </li>
+  </ul>
+</section>
+<section class="main" *ngIf="cards.length === 0">
+  No cards!
+</section>

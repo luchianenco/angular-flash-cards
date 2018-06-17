@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {FlashCard} from './flash-card';
+import {Language} from './language';
 
 @Injectable()
 export class FlashCardDataService {
@@ -41,7 +42,7 @@ export class FlashCardDataService {
     return this.cards;
   }
 
-  getByLanguageId(id: number): FlashCard[] {
-    return this.cards.filter(card => card.languageId === id);
+  getByLanguage(lang: Language): FlashCard[] {
+    return this.cards.filter(card => card.language === lang);
   }
 }

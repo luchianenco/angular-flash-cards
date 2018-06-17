@@ -1,6 +1,8 @@
+import {Language} from './language';
+
 export class FlashCard {
   id: number;
-  languageId: number;
+  language: Language;
   value = '';
   valueTranslation = '';
 
