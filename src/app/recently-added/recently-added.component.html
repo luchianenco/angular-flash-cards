@@ -10,3 +10,10 @@
 <section class="main" *ngIf="cards.length === 0">
   No cards!
 </section>
+<section>
+  <form #cardForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <input name="value" placeholder="Word" autofocus="" [(ngModel)]="newCard.value" #value="ngModel">
+    <input name="valueTranslation" placeholder="Translation" [(ngModel)]="newCard.valueTranslation" #valueTranslation="ngModel">
+    <input name="submit" type="submit" value="Add New"/>
+  </form>
+</section>
