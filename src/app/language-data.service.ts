@@ -11,10 +11,12 @@ export class LanguageDataService {
 
   constructor() {
     const langEn = new Language({id: 1, name: 'English'});
+    const langDe = new Language({id: 2, name: 'Deutsch'});
     this.add(langEn);
+    this.add(langDe);
   }
 
-  add(lang: Language): LanguageDataService{
+  add(lang: Language): LanguageDataService {
     if (!lang.id) {
       lang.id = ++this.lastId;
     }
@@ -22,7 +24,7 @@ export class LanguageDataService {
     return this;
   }
 
-  getById(id: number): Language {
+  getById(id: number): Language | undefined {
     return this.languages.filter(lang => lang.id === id).pop();
   }
 

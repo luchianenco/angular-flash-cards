@@ -1,3 +1,16 @@
-<p>
-  learn works!
-</p>
+<section *ngIf="showLearnResults == false">
+  <div>
+    {{nextCard.value}}
+  </div>
+  <form #learnForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <div>
+        <input name="answerText" placeholder="Enter translation" autofocus="" [(ngModel)]="answer" #answerText="ngModel">
+        <input type="submit" value="Submit" >
+    </div>
+  </form>
+</section>
+<section *ngIf="showLearnResults == true">
+  <div>Your result:</div>
+  <div>Correct Answers: {{correctCardCounter}}</div>
+  <div>Number of Cards: {{cardCounter}}</div>
+</section>

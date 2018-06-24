@@ -3,6 +3,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { FlashCardDataService } from './flash-card-data.service';
 import {FlashCard} from './flash-card';
 import {Language} from './language';
+import {Settings} from './settings';
+import {current} from 'codelyzer/util/syntaxKind';
 
 describe('FlashCardDataService', () => {
   beforeEach(() => {
@@ -30,11 +32,13 @@ describe('FlashCardDataService', () => {
     }));
   });
 
-  describe('#save(card)', () => {
+  describe('#save(card) increment card id', () => {
     it('should automatically assign an incrementing id', inject([FlashCardDataService], (service: FlashCardDataService) => {
       const lang = new Language({id: 1, name: 'English'});
+      const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
       const card1 = new FlashCard({language: lang, value: 'Education', valueTranslation: 'образование'});
       const card2 = new FlashCard({language: lang, value: 'Developer', valueTranslation: 'разработчик'});
+      service.setSettings(settings);
       service.add(card1);
       service.add(card2);
       expect(service.getById(1)).toEqual(card1);
@@ -42,10 +46,41 @@ describe('FlashCardDataService', () => {
     }));
   });
 
+  describe('#save(card) set default lang', () => {
+    it('should automatically assign current language', inject([FlashCardDataService], (service: FlashCardDataService) => {
+      const lang = new Language({id: 1, name: 'English'});
+      const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+      const card1 = new FlashCard({value: 'Education', valueTranslation: 'образование'});
+      service.setSettings(settings);
+      service.add(card1);
+      const cardLang = service.getById(1);
+      expect(service.getById(1)).toEqual(card1);
+      expect(cardLang.language.id).toEqual(1);
+
+    }));
+  });
+
+  describe('#setCurrentLanguage(id)', () => {
+    it('should change current language by id', inject([FlashCardDataService], (service: FlashCardDataService) => {
+      const lang = new Language({id: 1, name: 'English'});
+      const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+      service.setSettings(settings);
+      service.setCurrentLanguageById(2);
+      const card1 = new FlashCard({value: 'Education', valueTranslation: 'образование'});
+      service.add(card1);
+      const cardLang = service.getById(1);
+      expect(service.getById(1)).toEqual(card1);
+      expect(cardLang.language.id).toEqual(2);
+
+    }));
+  });
+
   describe('#removeById(id)', () => {
 
     it('should remove card with the corresponding id', inject([FlashCardDataService], (service: FlashCardDataService) => {
       const lang = new Language({id: 1, name: 'English'});
+      const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+      service.setSettings(settings);
       const card1 = new FlashCard({language: lang, value: 'Education', valueTranslation: 'образование'});
       const card2 = new FlashCard({language: lang, value: 'Developer', valueTranslation: 'разработчик'});
       service.add(card1);
@@ -59,6 +94,9 @@ describe('FlashCardDataService', () => {
 
     it('should not removing anything if card with corresponding id is not found',
       inject([FlashCardDataService], (service: FlashCardDataService) => {
+        const lang = new Language({id: 1, name: 'English'});
+        const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+        service.setSettings(settings);
         const card1 = new FlashCard({languageId: 1, value: 'Education', valueTranslation: 'образование'});
         const card2 = new FlashCard({languageId: 1, value: 'Developer', valueTranslation: 'разработчик'});
         service.add(card1);

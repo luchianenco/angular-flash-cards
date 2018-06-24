@@ -1,3 +1,17 @@
-<p>
-  settings works!
-</p>
+<section>
+  <form #cardForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <div>
+      <select name="currentLanguage" [(ngModel)]="newSettings.currentLanguage" #currentLanguage="ngModel">
+        <option *ngFor="let lang of languages" [ngValue]="lang">
+            {{lang.name}}
+        </option>
+      </select>
+    </div>
+    <div>
+      <input name="numberOfWords" placeholder="Number of Words" [(ngModel)]="newSettings.numberOfWords" #numberOfWords="ngModel">
+    </div>
+    <div>
+      <input name="submit" type="submit" value="Update"/>
+    </div>
+  </form>
+</section>
