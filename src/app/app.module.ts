@@ -26,7 +26,7 @@ import {ReversePipe} from './reverse-pipe';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'flash-cards' }),
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,

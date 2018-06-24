@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FlashCard} from './flash-card';
 import {Language} from './language';
-import {Settings} from './Settings';
+import {Settings} from './settings';
 import {LanguageDataService} from './language-data.service';
 
 @Injectable()

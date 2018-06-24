@@ -4,7 +4,6 @@ import { FlashCardDataService } from './flash-card-data.service';
 import {FlashCard} from './flash-card';
 import {Language} from './language';
 import {Settings} from './settings';
-import {current} from 'codelyzer/util/syntaxKind';
 
 describe('FlashCardDataService', () => {
   beforeEach(() => {
