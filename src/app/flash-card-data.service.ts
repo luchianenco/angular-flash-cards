@@ -15,17 +15,16 @@ export class FlashCardDataService {
   }
 
   setDefaults() {
-    console.log('defaults....');
     const settings = new Settings();
     settings.numberOfWords = 20;
     settings.currentLanguage = this.languageService.getById(1);
     this.setSettings(settings);
 
-    this.add(new FlashCard({id: 1, value: 'to be', valueTranslation: 'быть'}));
-    this.add(new FlashCard({id: 1, value: 'to jump', valueTranslation: 'прыгать'}));
-    this.add(new FlashCard({id: 1, value: 'to build', valueTranslation: 'строить'}));
-    this.add(new FlashCard({id: 1, value: 'to find', valueTranslation: 'искать'}));
-    this.add(new FlashCard({id: 1, value: 'to create', valueTranslation: 'создать'}));
+    this.add(new FlashCard({value: 'to be', valueTranslation: 'быть'}));
+    this.add(new FlashCard({value: 'to jump', valueTranslation: 'прыгать'}));
+    this.add(new FlashCard({value: 'to build', valueTranslation: 'строить'}));
+    this.add(new FlashCard({value: 'to find', valueTranslation: 'искать'}));
+    this.add(new FlashCard({value: 'to create', valueTranslation: 'создать'}));
   }
 
   add(card: FlashCard): FlashCardDataService {

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,7 @@ import {ReversePipe} from './reverse-pipe';
     ReversePipe
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -34,8 +36,9 @@ import {ReversePipe} from './reverse-pipe';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule,
+    MatListModule
   ],
+  exports: [CommonModule, ReversePipe],
   providers: [],
   bootstrap: [AppComponent]
 })
