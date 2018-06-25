@@ -12,7 +12,6 @@ import { RecentlyAddedComponent } from './recently-added/recently-added.componen
 import { SettingsComponent } from './settings/settings.component';
 import { LearnComponent } from './learn/learn.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {ReversePipe} from './reverse-pipe';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,7 @@ import {ReversePipe} from './reverse-pipe';
     RecentlyAddedComponent,
     SettingsComponent,
     LearnComponent,
-    NavbarComponent,
-    ReversePipe
+    NavbarComponent
   ],
   imports: [
     CommonModule,
