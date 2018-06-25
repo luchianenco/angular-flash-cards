@@ -5,8 +5,7 @@ import {FlashCard} from '../flash-card';
 @Component({
   selector: 'app-learn',
   templateUrl: './learn.component.html',
-  styleUrls: ['./learn.component.css'],
-  providers: [FlashCardDataService]
+  styleUrls: ['./learn.component.css']
 })
 
 export class LearnComponent implements OnInit {
@@ -19,7 +18,8 @@ export class LearnComponent implements OnInit {
   showLearnResults: boolean = false;
 
   constructor(private flashCardService: FlashCardDataService) {
-    this.cards = flashCardService.getAll();
+    const cards = flashCardService.getAll();
+    this.cards = cards.slice(0);
     this.nextCard = this.getNextCard();
   }
 

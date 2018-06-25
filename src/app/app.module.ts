@@ -38,7 +38,6 @@ import {ReversePipe} from './reverse-pipe';
     MatIconModule,
     MatListModule
   ],
-  exports: [CommonModule, ReversePipe],
   providers: [],
   bootstrap: [AppComponent]
 })

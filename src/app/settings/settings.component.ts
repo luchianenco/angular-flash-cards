@@ -7,9 +7,9 @@ import {Settings} from '../settings';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
-  providers: [FlashCardDataService, LanguageDataService]
+  styleUrls: ['./settings.component.css']
 })
+
 export class SettingsComponent implements OnInit {
 
   languages: Language[];
@@ -25,6 +25,5 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
     this.flashCardService.setSettings(this.newSettings);
-    console.log(this.flashCardService.getSettings());
   }
 }

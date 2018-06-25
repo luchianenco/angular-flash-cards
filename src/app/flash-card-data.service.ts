@@ -4,27 +4,15 @@ import {Language} from './language';
 import {Settings} from './settings';
 import {LanguageDataService} from './language-data.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FlashCardDataService {
   lastId: number = 0;
   cards: FlashCard[] = [];
   settings: Settings;
 
   constructor(private languageService: LanguageDataService) {
-    this.setDefaults();
-  }
-
-  setDefaults() {
-    const settings = new Settings();
-    settings.numberOfWords = 20;
-    settings.currentLanguage = this.languageService.getById(1);
-    this.setSettings(settings);
-
-    this.add(new FlashCard({value: 'to be', valueTranslation: 'быть'}));
-    this.add(new FlashCard({value: 'to jump', valueTranslation: 'прыгать'}));
-    this.add(new FlashCard({value: 'to build', valueTranslation: 'строить'}));
-    this.add(new FlashCard({value: 'to find', valueTranslation: 'искать'}));
-    this.add(new FlashCard({value: 'to create', valueTranslation: 'создать'}));
   }
 
   add(card: FlashCard): FlashCardDataService {

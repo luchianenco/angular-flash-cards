@@ -17,7 +17,6 @@ describe('FlashCardDataService', () => {
   }));
 
   describe('#getAll()', () => {
-    /*
     it('should return an empty array by default', inject([FlashCardDataService], (service: FlashCardDataService) => {
       expect(service.getAll()).toEqual([]);
     }));
@@ -30,10 +29,6 @@ describe('FlashCardDataService', () => {
       service.add(card2);
       expect(service.getAll()).toEqual([card1, card2]);
     }));
-    */
-    it('should return all flash cards', inject([FlashCardDataService], (service: FlashCardDataService) => {
-      expect(service.getAll().length).toEqual(5);
-    }));
   });
 
   describe('#save(card) increment card id', () => {
@@ -45,8 +40,8 @@ describe('FlashCardDataService', () => {
       service.setSettings(settings);
       service.add(card1);
       service.add(card2);
-      expect(service.getById(6)).toEqual(card1);
-      expect(service.getById(7)).toEqual(card2);
+      expect(service.getById(1)).toEqual(card1);
+      expect(service.getById(2)).toEqual(card2);
     }));
   });
 
@@ -58,7 +53,7 @@ describe('FlashCardDataService', () => {
       service.setSettings(settings);
       service.add(card1);
       const cardLang = service.getById(1);
-      expect(service.getById(6)).toEqual(card1);
+      expect(service.getById(1)).toEqual(card1);
       expect(cardLang.language.id).toEqual(1);
 
     }));
@@ -72,10 +67,9 @@ describe('FlashCardDataService', () => {
       service.setCurrentLanguageById(2);
       const card1 = new FlashCard({value: 'Education', valueTranslation: 'образование'});
       service.add(card1);
-      const cardLang = service.getById(6);
-      expect(service.getById(6)).toEqual(card1);
+      const cardLang = service.getById(1);
+      expect(service.getById(1)).toEqual(card1);
       expect(cardLang.language.id).toEqual(2);
-
     }));
   });
 
@@ -85,14 +79,14 @@ describe('FlashCardDataService', () => {
       const lang = new Language({id: 1, name: 'English'});
       const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
       service.setSettings(settings);
-      const card1 = new FlashCard({language: lang, value: 'Education', valueTranslation: 'образование'});
-      const card2 = new FlashCard({language: lang, value: 'Developer', valueTranslation: 'разработчик'});
+      const card1 = new FlashCard({id:1, language: lang, value: 'Education', valueTranslation: 'образование'});
+      const card2 = new FlashCard({id:2, language: lang, value: 'Developer', valueTranslation: 'разработчик'});
       service.add(card1);
       service.add(card2);
-      service.removeById(6);
-      expect(service.getAll().length).toEqual(6);
-      service.removeById(7);
-      expect(service.getAll().length).toEqual(5);
+      service.removeById(1);
+      expect(service.getAll()).toEqual([card2]);
+      service.removeById(2);
+      expect(service.getAll()).toEqual([]);
     }));
 
     it('should not removing anything if card with corresponding id is not found',
@@ -104,9 +98,9 @@ describe('FlashCardDataService', () => {
         const card2 = new FlashCard({language: lang, value: 'Developer', valueTranslation: 'разработчик'});
         service.add(card1);
         service.add(card2);
-        expect(service.getAll().length).toEqual(7);
-        service.removeById(8);
-        expect(service.getAll().length).toEqual(7);
+        expect(service.getAll()).toEqual([card1, card2]);
+        service.removeById(3);
+        expect(service.getAll()).toEqual([card1, card2]);
       }));
   });
 
@@ -114,9 +108,12 @@ describe('FlashCardDataService', () => {
 
     it('should return card with the corresponding id and updated data',
       inject([FlashCardDataService], (service: FlashCardDataService) => {
-        const card = new FlashCard({value: 'Education', valueTranslation: 'образование'});
+        const lang = new Language({id: 1, name: 'English'});
+        const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+        service.setSettings(settings);
+        const card = new FlashCard({id: 1, value: 'Education', valueTranslation: 'образование'});
         service.add(card);
-        const updatedCard = service.updateById(6, {
+        const updatedCard = service.updateById(1, {
           value: 'Game',
           valueTranslation: 'игра'
         });
@@ -125,9 +122,11 @@ describe('FlashCardDataService', () => {
 
     it('should return null if card is not found', inject([FlashCardDataService], (service: FlashCardDataService) => {
       const lang = new Language({id: 1, name: 'English'});
-      const card = new FlashCard({language: lang, value: 'Education', valueTranslation: 'образование'});
+      const settings = new Settings({currentLanguage: lang, numberOfWords: 20});
+      service.setSettings(settings);
+      const card = new FlashCard({id: 1, value: 'Education', valueTranslation: 'образование'});
       service.add(card);
-      const updatedCard = service.updateById(7, {
+      const updatedCard = service.updateById(2, {
         value: 'Game',
         valueTranslation: 'игра'
       });
