@@ -1,6 +1,6 @@
 <section class="main" *ngIf="cards.length > 0">
   <ul class="todo-list">
-    <li *ngFor="let card of (cards)">
+    <li *ngFor="let card of (cards | reverse)">
       <div class="view">
         <label>{{card.value}} - {{card.valueTranslation}}</label>
       </div>

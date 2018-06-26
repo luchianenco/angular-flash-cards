@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import { RecentlyAddedComponent } from './recently-added/recently-added.componen
 import { SettingsComponent } from './settings/settings.component';
 import { LearnComponent } from './learn/learn.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ReversePipe } from './reverse-pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     RecentlyAddedComponent,
     SettingsComponent,
     LearnComponent,
-    NavbarComponent
+    NavbarComponent,
+    ReversePipe
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatIconModule,
     MatListModule
   ],
+  exports: [ReversePipe],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -7,11 +7,9 @@ import { AppComponent } from './app.component';
 import {ReversePipe} from './reverse-pipe';
 
 @NgModule({
-  declarations: [
-    ReversePipe
-  ],
   imports: [
     AppModule,
+    ReversePipe,
     ServerModule,
     ModuleMapLoaderModule
   ],

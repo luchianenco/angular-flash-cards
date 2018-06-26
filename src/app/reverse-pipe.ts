@@ -4,8 +4,7 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'reverse',
   pure: false
 })
-export class ReversePipe implements PipeTransform{
-
+export class ReversePipe implements PipeTransform {
   transform (values) {
     return values.reverse();
   }

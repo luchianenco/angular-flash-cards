@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RecentlyAddedComponent } from './recently-added.component';
+import {ReversePipe} from '../reverse-pipe';
 
 describe('RecentlyAddedComponent', () => {
   let component: RecentlyAddedComponent;
@@ -9,7 +10,7 @@ describe('RecentlyAddedComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [ RecentlyAddedComponent ]
+      declarations: [ RecentlyAddedComponent, ReversePipe ]
     })
     .compileComponents();
   }));
